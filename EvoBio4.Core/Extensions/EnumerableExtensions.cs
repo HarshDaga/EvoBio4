@@ -107,10 +107,11 @@ namespace EvoBio4.Core.Extensions
 			var p = new List<double> ( list.Select ( selector ) );
 			var remaining = p.Sum ( );
 			var remainingIndices = new HashSet<int> ( Enumerable.Range ( 0, list.Count ) );
-			var removed = 0;
+			var randoms = Utility.Srs.NextDoubles ( list.Count - 1 );
+
 			for ( var i = 0; i < list.Count - 1; i++ )
 			{
-				var target = Utility.NextDouble * remaining;
+				var target = randoms[i] * remaining;
 				var index = 0;
 				var sum = p[0];
 				while ( sum <= target )
@@ -118,16 +119,13 @@ namespace EvoBio4.Core.Extensions
 
 				remaining -= p[index];
 				p[index]  =  0;
-				removed   += index + 1;
 				remainingIndices.Remove ( index );
 
 				if ( remaining < 1e-6 )
 					return list[remainingIndices.First ( )];
 			}
 
-			var removedIndex = list.Count * ( list.Count + 1 ) / 2 - removed - 1;
-
-			return list[removedIndex];
+			return list[remainingIndices.First ( )];
 		}
 
 		[DebuggerStepThrough]
