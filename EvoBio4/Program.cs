@@ -29,7 +29,7 @@ namespace EvoBio4
 			var timer = Stopwatch.StartNew ( );
 
 			var simulation = new Simulation<
-				SingleIterationBaseVersion,
+				NonReproducingHave0FitnessVersion,
 				FitnessProportionalDeathSelectionRule
 			> ( v );
 
