@@ -197,16 +197,12 @@ namespace EvoBio4.Core
 
 		public virtual void Normalize ( )
 		{
-			var qualitySum = AllGroups.Sum ( x => x.QualitySum );
-			var n = V.PopulationSize;
-
-			foreach ( var individual in AllIndividuals )
-				individual.Normalize ( qualitySum, n );
+			Population.Normalize ( );
 
 			if ( IsLoggingEnabled )
 			{
 				Logger.Debug ( "\n\nNormalization\n" );
-				Logger.Debug ( $"Quality Sum = {qualitySum}" );
+				Logger.Debug ( $"Quality Sum = {AllGroups.Sum ( x => x.QualitySum )}" );
 				foreach ( var individual in AllIndividuals )
 					Logger.Debug ( individual );
 			}

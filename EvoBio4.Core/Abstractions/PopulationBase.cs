@@ -48,6 +48,15 @@ namespace EvoBio4.Core.Abstractions
 			return group;
 		}
 
+		public void Normalize ( )
+		{
+			var sum = CooperatorGroup.QualitySum + DefectorGroup.QualitySum;
+			var n = AllIndividuals.Count;
+
+			CooperatorGroup.Normalize ( sum, n );
+			DefectorGroup.Normalize ( sum, n );
+		}
+
 		public (List<TIndividual> chosen, List<TIndividual> rejected) ChooseBy ( int amount,
 		                                                                         Func<TIndividual, double> selector ) =>
 			AllIndividuals.ChooseBy ( amount, selector );

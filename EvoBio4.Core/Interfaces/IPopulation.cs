@@ -16,5 +16,7 @@ namespace EvoBio4.Core.Interfaces
 		void Init ( TVariables variables );
 		IIndividualGroup<TIndividual> Add ( TIndividual individual );
 		IIndividualGroup<TIndividual> Remove ( TIndividual individual );
+
+		void Normalize ( );
 	}
 }

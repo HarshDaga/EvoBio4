@@ -52,6 +52,17 @@ namespace EvoBio4.Core.Abstractions
 			return false;
 		}
 
+		public void Normalize ( double qualitySum,
+		                        int populationSize )
+		{
+			QualitySum = 0;
+			foreach ( var individual in Individuals )
+			{
+				individual.Normalize ( qualitySum, populationSize );
+				QualitySum += individual.Quality;
+			}
+		}
+
 		public string ToTable ( )
 		{
 			return ToTable ( x => new

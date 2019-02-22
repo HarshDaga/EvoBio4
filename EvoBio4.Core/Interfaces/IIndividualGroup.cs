@@ -15,6 +15,9 @@ namespace EvoBio4.Core.Interfaces
 		void Populate ( int count,
 		                IVariables v );
 
+		void Normalize ( double qualitySum,
+		                 int populationSize );
+
 		string ToTable ( );
 		string ToTable ( Func<TIndividual, object> selector );
 	}

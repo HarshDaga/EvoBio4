@@ -21,16 +21,16 @@ namespace EvoBio4
 				Relatedness                = .15,
 				PercentileCutoff           = 10,
 				Z                          = 1.96,
-				MaxTimeSteps               = 2500,
-				Runs                       = 1000,
-				IncludeConfidenceIntervals = true
+				MaxTimeSteps               = 250000,
+				Runs                       = 10000,
+				IncludeConfidenceIntervals = false
 			};
 
 			var timer = Stopwatch.StartNew ( );
 
 			var simulation = new Simulation<
 				SingleIterationBaseVersion,
-				QualityProportionalDeathSelectionRule
+				FitnessProportionalDeathSelectionRule
 			> ( v );
 
 			simulation.Run ( );
