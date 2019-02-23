@@ -237,6 +237,12 @@ namespace EvoBio4.Core
 					break;
 			}
 
+			while ( TimeStepsPassed < V.MaxTimeSteps )
+			{
+				AddGenerationHistory ( );
+				++TimeStepsPassed;
+			}
+
 			CalculateHeritability ( );
 			CalculateWinner ( );
 
