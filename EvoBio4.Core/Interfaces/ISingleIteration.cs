@@ -16,13 +16,13 @@ namespace EvoBio4.Core.Interfaces
 		Winner Winner { get; }
 		int TimeStepsPassed { get; }
 
-		IDeathSelectionRule<TIndividual, TVariables, TPopulation> DeathSelectionRule { get; }
+		IPerishStrategy<TIndividual, TVariables, TPopulation> PerishStrategy { get; }
 
 		IDictionary<IndividualType, List<int>> GenerationHistory { get; }
 
 		void Init (
 			TVariables v,
-			IDeathSelectionRule<TIndividual, TVariables, TPopulation> deathSelectionRule,
+			IPerishStrategy<TIndividual, TVariables, TPopulation> perishStrategy,
 			bool isLoggingEnabled = false );
 
 		void CreateInitialPopulation ( );

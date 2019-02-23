@@ -1,6 +1,6 @@
 ﻿using EvoBio4.Core.Interfaces;
 
-namespace EvoBio4.Collections
+namespace EvoBio4.Implementations
 {
 	public class HeritabilitySummary : IHeritabilitySummary
 	{

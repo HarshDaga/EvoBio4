@@ -3,18 +3,20 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using CsvHelper;
+using EnumsNET;
+using EvoBio4.Core;
 using EvoBio4.Core.Enums;
 using EvoBio4.Core.Extensions;
 using EvoBio4.Core.Interfaces;
 using MathNet.Numerics.Statistics;
 
-namespace EvoBio4.Core.Abstractions
+namespace EvoBio4.Implementations
 {
 	[SuppressMessage ( "ReSharper", "UnusedAutoPropertyAccessor.Local" )]
 	[SuppressMessage ( "ReSharper", "MemberCanBePrivate.Local" )]
 	public class ConfidenceIntervalStats : IConfidenceIntervalStats
 	{
-		public static IEnumerable<IndividualType> IndividualTypes => EnumsNET.Enums.GetValues<IndividualType> ( );
+		public static IEnumerable<IndividualType> IndividualTypes => Enums.GetValues<IndividualType> ( );
 
 		public int TimeSteps { get; }
 		public int Runs { get; }
@@ -71,7 +73,7 @@ namespace EvoBio4.Core.Abstractions
 			for ( var i = 0; i < TimeSteps; i++ )
 				Summary.Add (
 					new Dictionary<IndividualType, ConfidenceInterval> (
-						EnumsNET.Enums.GetMemberCount<IndividualType> ( ) ) );
+						Enums.GetMemberCount<IndividualType> ( ) ) );
 
 			foreach ( var kp in RunningStats )
 			{

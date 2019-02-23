@@ -1,8 +1,9 @@
 ﻿using System.IO;
 using System.Linq;
-using EvoBio4.Collections;
 using EvoBio4.Core;
+using EvoBio4.Core.Abstractions;
 using EvoBio4.Core.Interfaces;
+using EvoBio4.Implementations;
 
 namespace EvoBio4
 {
@@ -10,10 +11,12 @@ namespace EvoBio4
 		SimulationBase<Individual, TIteration, Population,
 			HeritabilitySummary, Variables, TDeathSelectionRule>
 		where TIteration : SingleIterationBase<Individual, Population, Variables>, new ( )
-		where TDeathSelectionRule : IDeathSelectionRule<Individual, Variables, Population>, new ( )
+		where TDeathSelectionRule : IPerishStrategy<Individual, Variables, Population>, new ( )
 	{
 		public Simulation ( Variables v ) : base ( v )
 		{
+			if ( V.IncludeConfidenceIntervals )
+				ConfidenceIntervalStats = new ConfidenceIntervalStats ( V.MaxTimeSteps, V.Runs, V.Z );
 		}
 
 		public override void PrintConfidenceIntervals ( string fileName )

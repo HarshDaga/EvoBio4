@@ -7,7 +7,7 @@ using EvoBio4.Core.Extensions;
 using EvoBio4.Core.Interfaces;
 using NLog;
 
-namespace EvoBio4.Core
+namespace EvoBio4.Core.Abstractions
 {
 	public abstract class SingleIterationBase<TIndividual, TPopulation, TVariables> :
 		ISingleIteration<TIndividual, TVariables, TPopulation>
@@ -49,7 +49,7 @@ namespace EvoBio4.Core
 		public IHeritabilitySummary Heritability { get; set; }
 		public Winner Winner { get; set; }
 		public int TimeStepsPassed { get; protected set; }
-		public IDeathSelectionRule<TIndividual, TVariables, TPopulation> DeathSelectionRule { get; protected set; }
+		public IPerishStrategy<TIndividual, TVariables, TPopulation> PerishStrategy { get; protected set; }
 
 		public IDictionary<IndividualType, List<int>> GenerationHistory { get; protected set; }
 
@@ -67,21 +67,21 @@ namespace EvoBio4.Core
 
 		protected SingleIterationBase (
 			TVariables v,
-			IDeathSelectionRule<TIndividual, TVariables, TPopulation> deathSelectionRule,
+			IPerishStrategy<TIndividual, TVariables, TPopulation> perishStrategy,
 			bool isLoggingEnabled = false )
 		{
-			Init ( v, deathSelectionRule, isLoggingEnabled );
+			Init ( v, perishStrategy, isLoggingEnabled );
 		}
 
 		public void Init (
 			TVariables v,
-			IDeathSelectionRule<TIndividual, TVariables, TPopulation> deathSelectionRule,
+			IPerishStrategy<TIndividual, TVariables, TPopulation> perishStrategy,
 			bool isLoggingEnabled = false )
 		{
-			DeathSelectionRule = deathSelectionRule;
-			IsLoggingEnabled   = isLoggingEnabled;
-			V                  = v;
-			Population         = new TPopulation ( );
+			PerishStrategy   = perishStrategy;
+			IsLoggingEnabled = isLoggingEnabled;
+			V                = v;
+			Population       = new TPopulation ( );
 			History =
 				new List<(TIndividual parent, TIndividual offspring)> ( V.MaxTimeSteps );
 
@@ -178,7 +178,7 @@ namespace EvoBio4.Core
 
 		public virtual void ReproduceAndKill ( )
 		{
-			var victim = DeathSelectionRule.ChooseFrom ( Population );
+			var victim = PerishStrategy.ChooseFrom ( Population );
 			var parent = GetParent ( );
 
 			var child = parent.Reproduce ( ++LastIds[parent.Type], V.SdQuality ) as TIndividual;
@@ -285,6 +285,6 @@ namespace EvoBio4.Core
 		}
 
 		public override string ToString ( ) =>
-			$"{GetType ( ).Name} with {DeathSelectionRule.GetType ( ).Name}";
+			$"{GetType ( ).Name} with {PerishStrategy.GetType ( ).Name}";
 	}
 }

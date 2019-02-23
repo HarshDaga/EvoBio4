@@ -1,11 +1,11 @@
-﻿using EvoBio4.Collections;
-using EvoBio4.Core.Extensions;
+﻿using EvoBio4.Core.Extensions;
 using EvoBio4.Core.Interfaces;
+using EvoBio4.Implementations;
 
 namespace EvoBio4.DeathSelectionRules
 {
-	public class FitnessProportionalDeathSelectionRule :
-		IDeathSelectionRule<Individual, Variables, Population>
+	public class FitnessProportionalPerishStrategy :
+		IPerishStrategy<Individual, Variables, Population>
 	{
 		public Individual ChooseFrom ( Population population ) =>
 			population.AllIndividuals.ChooseAllButOneBy ( x => x.Fitness );

@@ -5,7 +5,7 @@ using EvoBio4.Core.Abstractions;
 using EvoBio4.Core.Enums;
 using EvoBio4.Core.Interfaces;
 
-namespace EvoBio4.Collections
+namespace EvoBio4.Implementations
 {
 	public class Individual : IndividualBase, IEquatable<Individual>
 	{

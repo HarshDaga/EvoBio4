@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using EvoBio4.Collections;
-using EvoBio4.Core;
+using EvoBio4.Core.Abstractions;
 using EvoBio4.Core.Extensions;
 using EvoBio4.Core.Interfaces;
+using EvoBio4.Implementations;
 using MathNet.Numerics.Statistics;
 using MoreLinq;
 
@@ -17,9 +17,9 @@ namespace EvoBio4.Versions
 
 		public SingleIterationBaseVersion (
 			Variables v,
-			IDeathSelectionRule<Individual, Variables, Population> deathSelectionRule,
+			IPerishStrategy<Individual, Variables, Population> perishStrategy,
 			bool isLoggingEnabled ) :
-			base ( v, deathSelectionRule, isLoggingEnabled )
+			base ( v, perishStrategy, isLoggingEnabled )
 		{
 		}
 

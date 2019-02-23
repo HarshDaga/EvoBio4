@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using EvoBio4.Core.Abstractions;
 using EvoBio4.Core.Enums;
 using EvoBio4.Core.Extensions;
 using EvoBio4.Core.Interfaces;
@@ -9,7 +8,7 @@ using MathNet.Numerics.Statistics;
 using MoreLinq;
 using ShellProgressBar;
 
-namespace EvoBio4.Core
+namespace EvoBio4.Core.Abstractions
 {
 	public abstract class SimulationBase<TIndividual, TIteration, TPopulation,
 	                                     THeritability, TVariables, TDeathSelectionRule> :
@@ -18,7 +17,7 @@ namespace EvoBio4.Core
 		where TVariables : IVariables, new ( )
 		where TIteration : ISingleIteration<TIndividual, TVariables, TPopulation>, new ( )
 		where THeritability : IHeritabilitySummary, new ( )
-		where TDeathSelectionRule : IDeathSelectionRule<TIndividual, TVariables, TPopulation>, new ( )
+		where TDeathSelectionRule : IPerishStrategy<TIndividual, TVariables, TPopulation>, new ( )
 		where TPopulation : IPopulation<TIndividual, TVariables>
 	{
 		public const int NumberWidth = 8;
@@ -27,7 +26,7 @@ namespace EvoBio4.Core
 		public THeritability HeritabilityMean { get; }
 		public THeritability HeritabilitySd { get; }
 		public List<IHeritabilitySummary> HeritabilitySummaries { get; }
-		public IConfidenceIntervalStats ConfidenceIntervalStats { get; }
+		public IConfidenceIntervalStats ConfidenceIntervalStats { get; protected set; }
 
 		public Dictionary<int, int> TimeStepsCount { get; }
 
@@ -55,9 +54,6 @@ namespace EvoBio4.Core
 			HeritabilitySummaries = new List<IHeritabilitySummary> ( V.Runs );
 			HeritabilityMean      = new THeritability ( );
 			HeritabilitySd        = new THeritability ( );
-
-			if ( V.IncludeConfidenceIntervals )
-				ConfidenceIntervalStats = new ConfidenceIntervalStats ( V.MaxTimeSteps, V.Runs, V.Z );
 
 			var timeSteps = V.MaxTimeSteps;
 			var runs = V.Runs;

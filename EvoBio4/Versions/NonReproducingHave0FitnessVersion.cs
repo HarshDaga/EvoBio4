@@ -2,7 +2,7 @@
 
 namespace EvoBio4.Versions
 {
-	class NonReproducingHave0FitnessVersion : SingleIterationBaseVersion
+	internal class NonReproducingHave0FitnessVersion : SingleIterationBaseVersion
 	{
 		[SuppressMessage ( "ReSharper", "InconsistentNaming" )]
 		public override void CalculateFitness ( )

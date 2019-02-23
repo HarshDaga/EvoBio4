@@ -1,11 +1,11 @@
-﻿using EvoBio4.Collections;
-using EvoBio4.Core;
+﻿using EvoBio4.Core;
 using EvoBio4.Core.Interfaces;
+using EvoBio4.Implementations;
 
 namespace EvoBio4.DeathSelectionRules
 {
-	public class EquiProbableDeathSelectionRule :
-		IDeathSelectionRule<Individual, Variables, Population>
+	public class EquiProbablePerishStrategy :
+		IPerishStrategy<Individual, Variables, Population>
 	{
 		public Individual ChooseFrom ( Population population )
 		{

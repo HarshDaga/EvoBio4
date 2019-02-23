@@ -3,7 +3,7 @@ using EvoBio4.Core.Abstractions;
 
 // ReSharper disable InconsistentNaming
 
-namespace EvoBio4.Collections
+namespace EvoBio4.Implementations
 {
 	public class Variables : VariablesBase
 	{

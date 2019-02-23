@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using EvoBio4.Core.Abstractions;
 
-namespace EvoBio4.Collections
+namespace EvoBio4.Implementations
 {
 	public class Population : PopulationBase<Individual, Variables>
 	{
