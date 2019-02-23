@@ -16,7 +16,7 @@ namespace EvoBio4.Core.Interfaces
 		ConfidenceInterval this [ int timeStep,
 		                          IndividualType type ] { get; }
 
-		void Add ( IDictionary<IndividualType, List<int>> iterationResult );
+		void AddRun ( IDictionary<IndividualType, List<int>> runResult );
 
 		void Compute ( );
 

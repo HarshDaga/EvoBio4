@@ -10,7 +10,7 @@ using EvoBio4.Core.Extensions;
 using EvoBio4.Core.Interfaces;
 using MathNet.Numerics.Statistics;
 
-namespace EvoBio4.Implementations
+namespace EvoBio4
 {
 	[SuppressMessage ( "ReSharper", "UnusedAutoPropertyAccessor.Local" )]
 	[SuppressMessage ( "ReSharper", "MemberCanBePrivate.Local" )]
@@ -54,9 +54,9 @@ namespace EvoBio4.Implementations
 			}
 		}
 
-		public void Add ( IDictionary<IndividualType, List<int>> iterationResult )
+		public void AddRun ( IDictionary<IndividualType, List<int>> runResult )
 		{
-			foreach ( var kp in iterationResult )
+			foreach ( var kp in runResult )
 			{
 				var type = kp.Key;
 				var survivors = kp.Value;

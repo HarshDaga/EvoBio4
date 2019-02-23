@@ -237,10 +237,9 @@ namespace EvoBio4.Core.Abstractions
 					break;
 			}
 
-			while ( TimeStepsPassed < V.MaxTimeSteps )
+			while ( ++TimeStepsPassed < V.MaxTimeSteps )
 			{
 				AddGenerationHistory ( );
-				++TimeStepsPassed;
 			}
 
 			CalculateHeritability ( );

@@ -88,7 +88,7 @@ namespace EvoBio4.Core.Abstractions
 							{
 								++Wins[iteration.Winner];
 								++TimeStepsCount[iteration.TimeStepsPassed];
-								ConfidenceIntervalStats?.Add ( iteration.GenerationHistory );
+								ConfidenceIntervalStats?.AddRun ( iteration.GenerationHistory );
 							}
 
 							if ( iteration.TimeStepsPassed > 2 )

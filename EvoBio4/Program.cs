@@ -23,9 +23,9 @@ namespace EvoBio4
 				Relatedness                = .15,
 				PercentileCutoff           = 10,
 				Z                          = 1.96,
-				MaxTimeSteps               = 250000,
+				MaxTimeSteps               = 25000,
 				Runs                       = 10000,
-				IncludeConfidenceIntervals = false
+				IncludeConfidenceIntervals = true
 			};
 
 			Simulate<
