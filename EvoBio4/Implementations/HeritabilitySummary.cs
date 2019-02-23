@@ -1,8 +1,6 @@
-﻿using EvoBio4.Core.Interfaces;
-
-namespace EvoBio4.Implementations
+﻿namespace EvoBio4.Implementations
 {
-	public class HeritabilitySummary : IHeritabilitySummary
+	public class HeritabilitySummary
 	{
 		public double Quality
 		{

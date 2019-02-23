@@ -3,20 +3,18 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using CsvHelper;
-using EnumsNET;
-using EvoBio4.Core;
-using EvoBio4.Core.Enums;
-using EvoBio4.Core.Extensions;
-using EvoBio4.Core.Interfaces;
+using EvoBio4.Enums;
+using EvoBio4.Extensions;
 using MathNet.Numerics.Statistics;
+using static EnumsNET.Enums;
 
 namespace EvoBio4
 {
 	[SuppressMessage ( "ReSharper", "UnusedAutoPropertyAccessor.Local" )]
 	[SuppressMessage ( "ReSharper", "MemberCanBePrivate.Local" )]
-	public class ConfidenceIntervalStats : IConfidenceIntervalStats
+	public class ConfidenceIntervalStats
 	{
-		public static IEnumerable<IndividualType> IndividualTypes => Enums.GetValues<IndividualType> ( );
+		public static IEnumerable<IndividualType> IndividualTypes => GetValues<IndividualType> ( );
 
 		public int TimeSteps { get; }
 		public int Runs { get; }
@@ -56,14 +54,9 @@ namespace EvoBio4
 
 		public void AddRun ( IDictionary<IndividualType, List<int>> runResult )
 		{
-			foreach ( var kp in runResult )
-			{
-				var type = kp.Key;
-				var survivors = kp.Value;
-
+			foreach ( var (type, survivors) in runResult )
 				for ( var timeStep = 0; timeStep < survivors.Count; timeStep++ )
 					RunningStats[type][timeStep].Push ( survivors[timeStep] );
-			}
 		}
 
 		public void Compute ( )
@@ -73,15 +66,11 @@ namespace EvoBio4
 			for ( var i = 0; i < TimeSteps; i++ )
 				Summary.Add (
 					new Dictionary<IndividualType, ConfidenceInterval> (
-						Enums.GetMemberCount<IndividualType> ( ) ) );
+						GetMemberCount<IndividualType> ( ) ) );
 
-			foreach ( var kp in RunningStats )
-			{
-				var type = kp.Key;
-				var stats = kp.Value;
+			foreach ( var (type, stats) in RunningStats )
 				for ( var i = 0; i < stats.Count; i++ )
 					Summary[i][type] = stats[i].ConfidenceInterval ( Z );
-			}
 		}
 
 		public void PrintToCsv ( string fileName )

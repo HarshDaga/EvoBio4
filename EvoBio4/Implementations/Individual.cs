@@ -1,28 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
-using EvoBio4.Core;
-using EvoBio4.Core.Abstractions;
-using EvoBio4.Core.Enums;
-using EvoBio4.Core.Interfaces;
+using EvoBio4.Enums;
 
 namespace EvoBio4.Implementations
 {
-	public class Individual : IndividualBase, IEquatable<Individual>
+	public class Individual : IEquatable<Individual>
 	{
-		public Individual ( ) : base ( default, default )
+		public int Id { get; }
+		public IndividualType Type { get; }
+		public double Quality { get; protected set; }
+		public double Fitness { get; set; }
+
+		public int OffspringCount { get; set; }
+
+		public string Name => $"{Type}_{Id}";
+		public string PaddedName => $"{Name,-15}";
+		public bool IsPerished { get; set; }
+
+		public Individual ( ) : this ( default, default )
 		{
 		}
 
 		public Individual ( IndividualType type,
-		                    int id ) : base ( type, id )
+		                    int id )
 		{
+			Type = type;
+			Id   = id;
 		}
 
 		public Individual (
 			IndividualType type,
 			int id,
 			double quality
-		) : base ( type, id )
+		) : this ( type, id )
 		{
 			Quality = quality;
 		}
@@ -30,12 +40,18 @@ namespace EvoBio4.Implementations
 		public bool Equals ( Individual other ) =>
 			other != null && Id == other.Id && Type == other.Type;
 
-		public override IIndividual Reproduce ( int id,
-		                                        double sd )
+		public Individual Reproduce ( int id,
+		                              double sd )
 		{
 			++OffspringCount;
 			var quality = Utility.NextGaussianNonNegative ( Quality, sd );
 			return new Individual ( Type, id, quality );
+		}
+
+		public virtual void Normalize ( double qualitySum,
+		                                int populationSize )
+		{
+			Quality /= qualitySum / 10d / populationSize;
 		}
 
 		public override bool Equals ( object obj ) =>

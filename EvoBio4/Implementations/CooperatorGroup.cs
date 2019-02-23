@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using EvoBio4.Core.Enums;
-using EvoBio4.Core.Interfaces;
+using EvoBio4.Enums;
 
 namespace EvoBio4.Implementations
 {
-	public class CooperatorGroup : IndividualGroupBase, ICooperatorGroup<Individual>
+	public class CooperatorGroup : IndividualGroupBase
 	{
 		public List<Individual> ReproducingIndividuals { get; private set; }
 		public List<Individual> NonReproducingIndividuals { get; private set; }

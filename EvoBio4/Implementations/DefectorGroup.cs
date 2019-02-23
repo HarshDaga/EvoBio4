@@ -1,9 +1,8 @@
-﻿using EvoBio4.Core.Enums;
-using EvoBio4.Core.Interfaces;
+﻿using EvoBio4.Enums;
 
 namespace EvoBio4.Implementations
 {
-	public class DefectorGroup : IndividualGroupBase, IDefectorGroup<Individual>
+	public class DefectorGroup : IndividualGroupBase
 	{
 		public DefectorGroup ( ) :
 			base ( IndividualType.Defector )

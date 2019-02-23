@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
-using EvoBio4.Core.Abstractions;
-using EvoBio4.Core.Interfaces;
-using EvoBio4.DeathSelectionRules;
 using EvoBio4.Implementations;
-using EvoBio4.Versions;
+using EvoBio4.Strategies;
+using static EvoBio4.Strategies.StrategyFactory;
 
 namespace EvoBio4
 {
@@ -23,27 +21,30 @@ namespace EvoBio4
 				Relatedness                = .15,
 				PercentileCutoff           = 10,
 				Z                          = 1.96,
-				MaxTimeSteps               = 25000,
-				Runs                       = 10000,
+				MaxTimeSteps               = 2500,
+				Runs                       = 1000,
 				IncludeConfidenceIntervals = true
 			};
 
-			Simulate<
-				NonReproducingHave0FitnessVersion,
-				FitnessProportionalPerishStrategy
-			> ( v );
+			var strategyCollection = new StrategyCollection
+			{
+				Perish       = Perish.QualityProportional,
+				Fitness      = Fitness.Default,
+				Reproduction = Reproduction.QualityProportional
+			};
+
+			Simulate<Iteration> ( v, strategyCollection );
 		}
 
-		public static void Simulate<TVersion, TDeathSelectionRule> ( Variables v )
-			where TVersion : SingleIterationBase<Individual, Population, Variables>, new ( )
-			where TDeathSelectionRule : IPerishStrategy<Individual, Variables, Population>, new ( )
+		public static void Simulate<TVersion> ( Variables v,
+		                                        IStrategyCollection strategyCollection )
+			where TVersion : Iteration, new ( )
 		{
 			var timer = Stopwatch.StartNew ( );
 
-			var simulation = new Simulation<
-				TVersion,
-				TDeathSelectionRule
-			> ( v );
+			var simulation = new Simulation<TVersion> ( v, strategyCollection );
+
+			simulation.LogRun ( 5, 2 );
 
 			simulation.Run ( );
 
