@@ -7,7 +7,7 @@ namespace EvoBio4.Strategies
 {
 	public static class StrategyFactory
 	{
-		public static class Survive
+		public static class Survival
 		{
 			public static readonly ISurvivalStrategy EquiProbable =
 				new EquiProbableSurvivalStrategy ( );
