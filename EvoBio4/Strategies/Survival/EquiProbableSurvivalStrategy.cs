@@ -1,8 +1,8 @@
 ﻿using EvoBio4.Implementations;
 
-namespace EvoBio4.Strategies.Perish
+namespace EvoBio4.Strategies.Survival
 {
-	public class EquiProbablePerishStrategy : IPerishStrategy
+	public class EquiProbableSurvivalStrategy : ISurvivalStrategy
 	{
 		public string Description => "Any 1 victim at random";
 

@@ -1,9 +1,9 @@
 ﻿using EvoBio4.Extensions;
 using EvoBio4.Implementations;
 
-namespace EvoBio4.Strategies.Perish
+namespace EvoBio4.Strategies.Survival
 {
-	public class QualityProportionalPerishStrategy : IPerishStrategy
+	public class QualityProportionalSurvivalStrategy : ISurvivalStrategy
 	{
 		public string Description => "Choose N-1 survivors with probability proportional to quality";
 

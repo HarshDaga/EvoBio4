@@ -1,9 +1,9 @@
 ﻿using EvoBio4.Extensions;
 using EvoBio4.Implementations;
 
-namespace EvoBio4.Strategies.Perish
+namespace EvoBio4.Strategies.Survival
 {
-	public class FitnessInverselyProportionalPerishStrategy : IPerishStrategy
+	public class FitnessInverselyProportionalSurvivalStrategy : ISurvivalStrategy
 	{
 		public string Description => "Choose 1 victim with probability inversely proportional to fitness";
 

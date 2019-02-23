@@ -28,7 +28,7 @@ namespace EvoBio4
 
 			var strategyCollection = new StrategyCollection
 			{
-				Perish       = Perish.QualityProportional,
+				Survival     = Survive.QualityProportional,
 				Fitness      = Fitness.Default,
 				Reproduction = Reproduction.QualityProportional,
 				PostProcess  = PostProcess.DoNothing

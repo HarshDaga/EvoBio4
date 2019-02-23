@@ -1,28 +1,28 @@
 ﻿using EvoBio4.Strategies.Fitness;
-using EvoBio4.Strategies.Perish;
 using EvoBio4.Strategies.PostProcess;
 using EvoBio4.Strategies.Reproduction;
+using EvoBio4.Strategies.Survival;
 
 namespace EvoBio4.Strategies
 {
 	public static class StrategyFactory
 	{
-		public static class Perish
+		public static class Survive
 		{
-			public static readonly IPerishStrategy EquiProbable =
-				new EquiProbablePerishStrategy ( );
+			public static readonly ISurvivalStrategy EquiProbable =
+				new EquiProbableSurvivalStrategy ( );
 
-			public static readonly IPerishStrategy QualityProportional =
-				new QualityProportionalPerishStrategy ( );
+			public static readonly ISurvivalStrategy QualityProportional =
+				new QualityProportionalSurvivalStrategy ( );
 
-			public static readonly IPerishStrategy FitnessProportional =
-				new FitnessProportionalPerishStrategy ( );
+			public static readonly ISurvivalStrategy FitnessProportional =
+				new FitnessProportionalSurvivalStrategy ( );
 
-			public static readonly IPerishStrategy QualityInverselyProportional =
-				new QualityInverselyProportionalPerishStrategy ( );
+			public static readonly ISurvivalStrategy QualityInverselyProportional =
+				new QualityInverselyProportionalSurvivalStrategy ( );
 
-			public static readonly IPerishStrategy FitnessInverselyProportional =
-				new FitnessInverselyProportionalPerishStrategy ( );
+			public static readonly ISurvivalStrategy FitnessInverselyProportional =
+				new FitnessInverselyProportionalSurvivalStrategy ( );
 		}
 
 		public static class Fitness

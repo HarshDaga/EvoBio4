@@ -116,7 +116,7 @@ namespace EvoBio4
 
 		public virtual void ReproduceAndKill ( )
 		{
-			var victim = StrategyCollection.Perish.Choose ( this );
+			var victim = StrategyCollection.Survival.Choose ( this );
 			var parent = StrategyCollection.Reproduction.Choose ( this );
 
 			var child = parent.Reproduce ( ++LastIds[parent.Type], V.SdQuality );
