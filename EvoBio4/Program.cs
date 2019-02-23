@@ -30,7 +30,8 @@ namespace EvoBio4
 			{
 				Perish       = Perish.QualityProportional,
 				Fitness      = Fitness.Default,
-				Reproduction = Reproduction.QualityProportional
+				Reproduction = Reproduction.QualityProportional,
+				PostProcess  = PostProcess.DoNothing
 			};
 
 			Simulate<Iteration> ( v, strategyCollection );

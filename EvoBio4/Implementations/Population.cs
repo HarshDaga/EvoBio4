@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using EvoBio4.Enums;
-using EvoBio4.Extensions;
+using MoreLinq;
 
 namespace EvoBio4.Implementations
 {
@@ -76,28 +75,9 @@ namespace EvoBio4.Implementations
 			DefectorGroup.Normalize ( sum, n );
 		}
 
-		public (List<Individual> chosen, List<Individual> rejected) ChooseBy ( int amount,
-		                                                                       Func<Individual, double> selector ) =>
-			AllIndividuals.ChooseBy ( amount, selector );
-
-		public List<Individual> RepetitiveChooseBy ( int amount,
-		                                             Func<Individual, double> selector )
+		public void Shuffle ( )
 		{
-			var cumulative = AllIndividuals.Select ( selector ).CumulativeSum ( ).ToList ( );
-			var total = cumulative.Last ( );
-
-			var parents = new List<Individual> ( amount );
-			for ( var i = 0; i < amount; i++ )
-			{
-				var target = Utility.NextDouble * total;
-				var index = cumulative.BinarySearch ( target );
-				if ( index < 0 )
-					index = ~index;
-
-				parents.Add ( AllIndividuals[index] );
-			}
-
-			return parents;
+			AllIndividuals.Shuffle ( Utility.Srs );
 		}
 	}
 }

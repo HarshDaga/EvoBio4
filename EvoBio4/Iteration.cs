@@ -18,23 +18,9 @@ namespace EvoBio4
 
 		public Population Population { get; protected set; }
 
-		public IList<Individual> AllIndividuals
-		{
-			get => Population.AllIndividuals;
-			set => Population.AllIndividuals = value;
-		}
-
-		public CooperatorGroup CooperatorGroup
-		{
-			get => Population.CooperatorGroup;
-			set => Population.CooperatorGroup = value;
-		}
-
-		public DefectorGroup DefectorGroup
-		{
-			get => Population.DefectorGroup;
-			set => Population.DefectorGroup = value;
-		}
+		public IList<Individual> AllIndividuals => Population.AllIndividuals;
+		public CooperatorGroup CooperatorGroup => Population.CooperatorGroup;
+		public DefectorGroup DefectorGroup => Population.DefectorGroup;
 
 		public List<IndividualGroupBase> AllGroups { get; protected set; }
 
@@ -157,6 +143,11 @@ namespace EvoBio4
 				Logger.Debug ( CooperatorGroup.ToTable ( ) );
 				Logger.Debug ( DefectorGroup.ToTable ( ) );
 			}
+		}
+
+		public virtual void PostProcess ( )
+		{
+			StrategyCollection.PostProcess.Process ( this );
 		}
 
 		public virtual bool SimulateGeneration ( )

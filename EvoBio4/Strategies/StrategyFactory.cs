@@ -1,5 +1,6 @@
 ﻿using EvoBio4.Strategies.Fitness;
 using EvoBio4.Strategies.Perish;
+using EvoBio4.Strategies.PostProcess;
 using EvoBio4.Strategies.Reproduction;
 
 namespace EvoBio4.Strategies
@@ -37,6 +38,15 @@ namespace EvoBio4.Strategies
 		{
 			public static readonly IReproductionStrategy QualityProportional =
 				new QualityProportionalReproductionStrategy ( );
+		}
+
+		public static class PostProcess
+		{
+			public static readonly IPostProcessStrategy DoNothing =
+				new DoNothingPostProcessStrategy ( );
+
+			public static readonly IPostProcessStrategy Shuffle =
+				new ShufflePostProcessStrategy ( );
 		}
 	}
 }
