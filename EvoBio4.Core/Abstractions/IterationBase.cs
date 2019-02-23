@@ -9,11 +9,12 @@ using NLog;
 
 namespace EvoBio4.Core.Abstractions
 {
-	public abstract class SingleIterationBase<TIndividual, TPopulation, TVariables> :
-		ISingleIteration<TIndividual, TVariables, TPopulation>
+	public abstract class IterationBase<TIndividual, TVariables, TPopulation, TIteration> :
+		IIteration<TIndividual, TVariables, TPopulation, TIteration>
 		where TIndividual : class, IIndividual, new ( )
 		where TPopulation : class, IPopulation<TIndividual, TVariables>, new ( )
 		where TVariables : IVariables
+		where TIteration : IterationBase<TIndividual, TVariables, TPopulation, TIteration>, new ( )
 	{
 		// ReSharper disable once StaticMemberInGenericType
 		protected static readonly Logger Logger = LogManager.GetCurrentClassLogger ( );
@@ -49,7 +50,12 @@ namespace EvoBio4.Core.Abstractions
 		public IHeritabilitySummary Heritability { get; set; }
 		public Winner Winner { get; set; }
 		public int TimeStepsPassed { get; protected set; }
-		public IPerishStrategy<TIndividual, TVariables, TPopulation> PerishStrategy { get; protected set; }
+
+		public PerishStrategyDelegate<TIndividual, TVariables, TPopulation, TIteration> PerishStrategy
+		{
+			get;
+			protected set;
+		}
 
 		public IDictionary<IndividualType, List<int>> GenerationHistory { get; protected set; }
 
@@ -61,13 +67,13 @@ namespace EvoBio4.Core.Abstractions
 
 		public List<(TIndividual parent, TIndividual offspring)> History;
 
-		protected SingleIterationBase ( )
+		protected IterationBase ( )
 		{
 		}
 
-		protected SingleIterationBase (
+		protected IterationBase (
 			TVariables v,
-			IPerishStrategy<TIndividual, TVariables, TPopulation> perishStrategy,
+			PerishStrategyDelegate<TIndividual, TVariables, TPopulation, TIteration> perishStrategy,
 			bool isLoggingEnabled = false )
 		{
 			Init ( v, perishStrategy, isLoggingEnabled );
@@ -75,7 +81,7 @@ namespace EvoBio4.Core.Abstractions
 
 		public void Init (
 			TVariables v,
-			IPerishStrategy<TIndividual, TVariables, TPopulation> perishStrategy,
+			PerishStrategyDelegate<TIndividual, TVariables, TPopulation, TIteration> perishStrategy,
 			bool isLoggingEnabled = false )
 		{
 			PerishStrategy   = perishStrategy;
@@ -178,7 +184,7 @@ namespace EvoBio4.Core.Abstractions
 
 		public virtual void ReproduceAndKill ( )
 		{
-			var victim = PerishStrategy.ChooseFrom ( Population );
+			var victim = PerishStrategy ( this as TIteration );
 			var parent = GetParent ( );
 
 			var child = parent.Reproduce ( ++LastIds[parent.Type], V.SdQuality ) as TIndividual;
