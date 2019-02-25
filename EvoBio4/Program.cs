@@ -14,8 +14,8 @@ namespace EvoBio4
 
 			var v = new Variables
 			{
-				CooperatorQuantity         = 10,
-				DefectorQuantity           = 10,
+				CooperatorQuantity         = 100,
+				DefectorQuantity           = 100,
 				SdQuality                  = 1,
 				Y                          = .8,
 				Relatedness                = .15,
@@ -31,7 +31,7 @@ namespace EvoBio4
 				Survival     = Survival.FitnessProportional,
 				Fitness      = Fitness.NonReproducingHave0Fitness,
 				Reproduction = Reproduction.FitnessProportional,
-				PostProcess  = PostProcess.Shuffle
+				PostProcess  = PostProcess.DoNothing
 			};
 
 			Simulate<Iteration> ( v, strategyCollection );

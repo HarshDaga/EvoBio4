@@ -15,7 +15,6 @@ namespace EvoBio4.Implementations
 
 		public string Name => $"{Type}_{Id}";
 		public string PaddedName => $"{Name,-15}";
-		public bool IsPerished { get; set; }
 
 		public Individual ( ) : this ( default, default )
 		{
@@ -37,9 +36,6 @@ namespace EvoBio4.Implementations
 			Quality = quality;
 		}
 
-		public bool Equals ( Individual other ) =>
-			other != null && Id == other.Id && Type == other.Type;
-
 		public Individual Reproduce ( int id,
 		                              double sd )
 		{
@@ -52,7 +48,11 @@ namespace EvoBio4.Implementations
 		                                int populationSize )
 		{
 			Quality /= qualitySum / 10d / populationSize;
+			Fitness =  0;
 		}
+
+		public bool Equals ( Individual other ) =>
+			other != null && Id == other.Id && Type == other.Type;
 
 		public override bool Equals ( object obj ) =>
 			Equals ( obj as Individual );

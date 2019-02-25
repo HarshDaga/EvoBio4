@@ -104,12 +104,27 @@ namespace EvoBio4.Extensions
 		                                       Func<T, double> selector )
 		{
 			var list = enumerable.ToList ( );
+			var n = list.Count;
 			var p = new List<double> ( list.Select ( selector ) );
-			var remaining = p.Sum ( );
-			var remainingIndices = new HashSet<int> ( Enumerable.Range ( 0, list.Count ) );
-			var randoms = Utility.Srs.NextDoubles ( list.Count - 1 );
 
-			for ( var i = 0; i < list.Count - 1; i++ )
+			var remaining = 0d;
+			foreach ( var item in list )
+			{
+				var pCur = selector ( item );
+				if ( pCur == 0 )
+				{
+					var zeroes = list.Where ( x => selector ( x ) == 0 ).ToList ( );
+					var i = Utility.Srs.Next ( zeroes.Count );
+					return zeroes[i];
+				}
+
+				remaining += pCur;
+			}
+
+			var remainingIndex = n * ( n - 1 ) / 2;
+			var randoms = Utility.Srs.NextDoubles ( n - 1 );
+
+			for ( var i = 0; i < n - 1; i++ )
 			{
 				var target = randoms[i] * remaining;
 				var index = 0;
@@ -117,15 +132,12 @@ namespace EvoBio4.Extensions
 				while ( sum <= target )
 					sum += p[++index];
 
-				remaining -= p[index];
-				p[index]  =  0;
-				remainingIndices.Remove ( index );
-
-				if ( remaining < 1e-6 )
-					return list[remainingIndices.First ( )];
+				remaining      -= p[index];
+				p[index]       =  0;
+				remainingIndex -= index;
 			}
 
-			return list[remainingIndices.First ( )];
+			return list[remainingIndex];
 		}
 
 		[DebuggerStepThrough]

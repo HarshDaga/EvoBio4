@@ -87,11 +87,11 @@ namespace EvoBio4
 
 		public virtual void SplitCooperators ( )
 		{
+			var index = (int) Math.Round ( ( AllIndividuals.Count - 1d ) * V.PercentileCutoff / 100d );
 			var threshold = AllIndividuals
 				.Select ( x => x.Quality )
 				.OrderBy ( x => x )
-				.ToList ( )
-				.AtPercentile ( V.PercentileCutoff );
+				.ElementAt ( index );
 			CooperatorGroup.Split ( threshold );
 
 			ForegoneQuality = CooperatorGroup.NonReproducingQualitySum;

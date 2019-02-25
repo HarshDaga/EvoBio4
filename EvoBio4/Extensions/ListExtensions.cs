@@ -33,17 +33,17 @@ namespace EvoBio4.Extensions
 		}
 
 		[Pure]
-		public static T AtPercentile<T> ( this IList<T> list,
-		                                  double percentage )
+		public static T AtPercentilePreSorted<T> ( this IList<T> list,
+		                                           double percentage )
 		{
 			var index = (int) Math.Round ( ( list.Count - 1d ) * percentage / 100d );
 			return list[index];
 		}
 
 		[Pure]
-		public static T AtPercentile<T> ( this IList<T> list,
-		                                  double percentage,
-		                                  T @default )
+		public static T AtPercentilePreSorted<T> ( this IList<T> list,
+		                                           double percentage,
+		                                           T @default )
 		{
 			if ( percentage < 0 )
 				return @default;
