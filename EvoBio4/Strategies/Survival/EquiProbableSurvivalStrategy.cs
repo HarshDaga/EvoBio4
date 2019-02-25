@@ -2,9 +2,9 @@
 
 namespace EvoBio4.Strategies.Survival
 {
-	public class EquiProbableSurvivalStrategy : ISurvivalStrategy
+	public class EquiProbableSurvivalStrategy : StrategyBase, ISurvivalStrategy
 	{
-		public string Description => "Any 1 victim at random";
+		public override string Description => "Any 1 victim at random";
 
 		public Individual Choose ( Iteration iteration )
 		{

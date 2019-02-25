@@ -1,9 +1,7 @@
 ﻿namespace EvoBio4.Strategies.Fitness
 {
-	public interface IFitnessStrategy
+	public interface IFitnessStrategy : IStrategy
 	{
-		string Description { get; }
-
 		double Calculate ( Iteration iteration );
 	}
 }

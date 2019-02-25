@@ -1,13 +1,10 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using NLog;
 
 namespace EvoBio4.Strategies.Fitness
 {
-	public class NonReproducingHave0FitnessStrategy : IFitnessStrategy
+	public class NonReproducingHave0FitnessStrategy : StrategyBase, IFitnessStrategy
 	{
-		private static readonly Logger Logger = LogManager.GetCurrentClassLogger ( );
-
-		public string Description => "Non Reproducing Cooperators have 0 fitness";
+		public override string Description => "Non Reproducing Cooperators have 0 fitness";
 
 		[SuppressMessage ( "ReSharper", "InconsistentNaming" )]
 		public double Calculate ( Iteration iteration )

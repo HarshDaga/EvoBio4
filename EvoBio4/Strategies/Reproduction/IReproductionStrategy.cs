@@ -2,10 +2,8 @@
 
 namespace EvoBio4.Strategies.Reproduction
 {
-	public interface IReproductionStrategy
+	public interface IReproductionStrategy : IStrategy
 	{
-		string Description { get; }
-
 		Individual Choose ( Iteration iteration );
 	}
 }

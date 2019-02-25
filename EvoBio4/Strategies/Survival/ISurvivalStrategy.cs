@@ -2,10 +2,8 @@
 
 namespace EvoBio4.Strategies.Survival
 {
-	public interface ISurvivalStrategy
+	public interface ISurvivalStrategy : IStrategy
 	{
-		string Description { get; }
-
 		Individual Choose ( Iteration iteration );
 	}
 }

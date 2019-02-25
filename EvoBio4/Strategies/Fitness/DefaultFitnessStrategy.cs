@@ -1,13 +1,10 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using NLog;
 
 namespace EvoBio4.Strategies.Fitness
 {
-	public class DefaultFitnessStrategy : IFitnessStrategy
+	public class DefaultFitnessStrategy : StrategyBase, IFitnessStrategy
 	{
-		private static readonly Logger Logger = LogManager.GetCurrentClassLogger ( );
-
-		public string Description => "Default strategy";
+		public override string Description => "Default strategy";
 
 		[SuppressMessage ( "ReSharper", "InconsistentNaming" )]
 		public double Calculate ( Iteration iteration )

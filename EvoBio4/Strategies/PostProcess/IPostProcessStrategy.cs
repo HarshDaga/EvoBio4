@@ -1,9 +1,7 @@
 ﻿namespace EvoBio4.Strategies.PostProcess
 {
-	public interface IPostProcessStrategy
+	public interface IPostProcessStrategy : IStrategy
 	{
-		string Description { get; }
-
 		void Process ( Iteration iteration );
 	}
 }

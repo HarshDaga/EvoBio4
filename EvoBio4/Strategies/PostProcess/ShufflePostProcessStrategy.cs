@@ -1,8 +1,8 @@
 ﻿namespace EvoBio4.Strategies.PostProcess
 {
-	public class ShufflePostProcessStrategy : IPostProcessStrategy
+	public class ShufflePostProcessStrategy : StrategyBase, IPostProcessStrategy
 	{
-		public string Description => "Shuffle the list of individuals";
+		public override string Description => "Shuffle the list of individuals";
 
 		public void Process ( Iteration iteration )
 		{

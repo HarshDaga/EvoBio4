@@ -14,9 +14,9 @@ namespace EvoBio4.Strategies
 
 		public override string ToString ( ) =>
 			"Strategies\n" +
-			$"Perish : {Survival.Description}\n" +
-			$"Fitness : {Fitness.Description}\n" +
-			$"Reproduction: {Reproduction.Description}\n" +
-			$"Post Process: {PostProcess.Description}";
+			$"Survival : {Survival}\n" +
+			$"Fitness : {Fitness}\n" +
+			$"Reproduction: {Reproduction}\n" +
+			$"Post Process: {PostProcess}";
 	}
 }

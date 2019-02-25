@@ -4,9 +4,10 @@ using EvoBio4.Implementations;
 
 namespace EvoBio4.Strategies.Reproduction
 {
-	public class FitnessProportionalReproductionStrategy : IReproductionStrategy
+	public class FitnessProportionalReproductionStrategy : StrategyBase, IReproductionStrategy
 	{
-		public string Description => "Choose 1 reproducing individual with probability proportional to quality";
+		public override string Description =>
+			"Choose 1 reproducing individual with probability proportional to fitness";
 
 		public Individual Choose ( Iteration iteration ) =>
 			iteration.CooperatorGroup
