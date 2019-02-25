@@ -39,7 +39,7 @@ Here's a list of all the tasks and their corresponding strategies:
   - `Default` - The default fitness formula as written in the manuscript
   - `NonReproducingHave0Fitness` - Non reproducing cooperators are allotted 0 fitness
 - `Reproduction` - Select one individual from the population to reproduce
-  - `QualityProportional` - The probability of an individual being chosen to reproduce is directly proportional to its quality
+  - `FitnessProportional` - The probability of an individual being chosen to reproduce is directly proportional to its fitness
 - `PostProcess` - Some tasks to be more performed at the end of each time step
   - `DoNothing` - Nothing is done
   - `Shuffle` - The list of individuals is shuffled

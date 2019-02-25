@@ -30,7 +30,7 @@ namespace EvoBio4
 			{
 				Survival     = Survival.QualityProportional,
 				Fitness      = Fitness.Default,
-				Reproduction = Reproduction.QualityProportional,
+				Reproduction = Reproduction.FitnessProportional,
 				PostProcess  = PostProcess.DoNothing
 			};
 

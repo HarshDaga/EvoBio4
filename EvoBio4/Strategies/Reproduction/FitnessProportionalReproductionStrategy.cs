@@ -4,7 +4,7 @@ using EvoBio4.Implementations;
 
 namespace EvoBio4.Strategies.Reproduction
 {
-	public class QualityProportionalReproductionStrategy : IReproductionStrategy
+	public class FitnessProportionalReproductionStrategy : IReproductionStrategy
 	{
 		public string Description => "Choose 1 reproducing individual with probability proportional to quality";
 

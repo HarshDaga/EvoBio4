@@ -36,8 +36,8 @@ namespace EvoBio4.Strategies
 
 		public static class Reproduction
 		{
-			public static readonly IReproductionStrategy QualityProportional =
-				new QualityProportionalReproductionStrategy ( );
+			public static readonly IReproductionStrategy FitnessProportional =
+				new FitnessProportionalReproductionStrategy ( );
 		}
 
 		public static class PostProcess
