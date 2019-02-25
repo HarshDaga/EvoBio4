@@ -17,6 +17,9 @@ namespace EvoBio4.Strategies.Fitness
 			var r = iteration.V.Relatedness;
 			var totalFitness = 0d;
 
+			foreach ( var individual in iteration.CooperatorGroup.NonReproducingIndividuals )
+				individual.Fitness = 0;
+
 			foreach ( var individual in iteration.CooperatorGroup.ReproducingIndividuals )
 			{
 				var j = individual.Quality;
