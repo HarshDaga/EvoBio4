@@ -74,6 +74,13 @@ namespace EvoBio4.Extensions
 				.ToList ( );
 			var total = cumulative.Last ( );
 
+			if ( double.IsPositiveInfinity ( total ) )
+			{
+				var infinities = backup.Where ( x => double.IsPositiveInfinity ( selector ( x ) ) ).ToList ( );
+				var i = Utility.Srs.Next ( infinities.Count );
+				return infinities[i];
+			}
+
 			var target = Utility.NextDouble * total;
 			var index = cumulative.BinarySearch ( target );
 			if ( index < 0 )

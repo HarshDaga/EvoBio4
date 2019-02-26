@@ -18,17 +18,17 @@ namespace EvoBio4
 				DefectorQuantity           = 100,
 				SdQuality                  = 1,
 				Y                          = .8,
-				Relatedness                = .15,
+				Relatedness                = .1,
 				PercentileCutoff           = 10,
 				Z                          = 1.96,
-				MaxTimeSteps               = 10000,
-				Runs                       = 1000,
+				MaxTimeSteps               = 15000,
+				Runs                       = 10000,
 				IncludeConfidenceIntervals = true
 			};
 
 			var strategyCollection = new StrategyCollection
 			{
-				Survival     = Survival.FitnessProportional,
+				Survival     = Survival.FitnessInverselyProportional,
 				Fitness      = Fitness.NonReproducingHave0Fitness,
 				Reproduction = Reproduction.FitnessProportional,
 				PostProcess  = PostProcess.DoNothing
