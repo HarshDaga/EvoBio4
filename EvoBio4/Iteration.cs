@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using EvoBio4.Enums;
-using EvoBio4.Extensions;
 using EvoBio4.Implementations;
 using EvoBio4.Strategies;
 using MathNet.Numerics.Statistics;

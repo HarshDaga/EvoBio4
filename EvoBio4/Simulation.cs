@@ -45,7 +45,7 @@ namespace EvoBio4
 				[Winner.Tie]                     = 0
 			};
 			TimeStepsCount = Enumerable
-				.Range ( 1, V.MaxTimeSteps )
+				.Range ( 0, V.MaxTimeSteps + 1 )
 				.ToDictionary ( x => x, x => 0 );
 
 			HeritabilitySummaries = new List<HeritabilitySummary> ( V.Runs );
