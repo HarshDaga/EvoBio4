@@ -14,21 +14,21 @@ namespace EvoBio4
 
 			var v = new Variables
 			{
-				CooperatorQuantity         = 100,
-				DefectorQuantity           = 100,
+				CooperatorQuantity         = 10,
+				DefectorQuantity           = 10,
 				SdQuality                  = 1,
 				Y                          = .8,
-				Relatedness                = .1,
+				Relatedness                = .15,
 				PercentileCutoff           = 10,
 				Z                          = 1.96,
-				MaxTimeSteps               = 15000,
+				MaxTimeSteps               = 5000,
 				Runs                       = 10000,
 				IncludeConfidenceIntervals = true
 			};
 
 			var strategyCollection = new StrategyCollection
 			{
-				Survival     = Survival.FitnessInverselyProportional,
+				Survival     = Survival.QualityProportional,
 				Fitness      = Fitness.NonReproducingHave0Fitness,
 				Reproduction = Reproduction.FitnessProportional,
 				PostProcess  = PostProcess.DoNothing

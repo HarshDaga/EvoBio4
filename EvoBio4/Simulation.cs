@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using CsvHelper;
 using EvoBio4.Enums;
 using EvoBio4.Implementations;
 using EvoBio4.Strategies;
@@ -110,8 +111,15 @@ namespace EvoBio4
 					HeritabilitySummaries.Select ( x => x.Values[index] ).MeanStandardDeviation ( );
 			}
 
+			PrintHeritabilitySummaries ( "Heritability.csv" );
 			if ( V.IncludeConfidenceIntervals )
 				PrintConfidenceIntervals ( "ConfidenceIntervals.txt" );
+		}
+
+		public void PrintHeritabilitySummaries ( string fileName )
+		{
+			using ( var csv = new CsvWriter ( File.CreateText ( fileName ) ) )
+				csv.WriteRecords ( HeritabilitySummaries );
 		}
 
 		public void PrintConfidenceIntervals ( string fileName )
@@ -152,15 +160,21 @@ namespace EvoBio4
 			result += $"\n\n\nHeritability Mean:\n{HeritabilityMean}\n";
 			result += $"\nHeritability Standard Deviation:\n{HeritabilitySd}\n";
 
+			result += BuildHistogram ( );
+
+			return result;
+		}
+
+		private string BuildHistogram ( )
+		{
 			var max = TimeStepsCount.Values.Max ( );
-			result += "\nGenerations Count:\n";
+			var result = "\nGenerations Count:\n";
 			result += string.Join (
 				"\n",
 				TimeStepsCount
 					.Where ( x => x.Value != 0 )
 					.Select ( pair => $"{pair.Key,-3} {pair.Value,-5} " +
 					                  $"{new string ( '█', pair.Value * 100 / max )}" ) );
-
 			return result;
 		}
 	}

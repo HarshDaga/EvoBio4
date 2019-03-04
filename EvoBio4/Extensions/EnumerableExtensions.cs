@@ -47,9 +47,9 @@ namespace EvoBio4.Extensions
 			var cumulative = allIndividuals
 				.CumulativeSum ( selector )
 				.ToList ( );
-			var total = cumulative.Last ( );
+			var (sum, _) = cumulative.Last ( );
 
-			var target = Utility.NextDouble * total.sum;
+			var target = Utility.NextDouble * sum;
 
 			int Comparison ( (double sum, T) x,
 			                 (double sum, T) y ) =>
