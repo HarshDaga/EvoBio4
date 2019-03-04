@@ -104,11 +104,14 @@ namespace EvoBio4
 					);
 			}
 
+			var clean = HeritabilitySummaries
+				.Where ( x => !x.Values.Any ( double.IsNaN ) )
+				.ToList ( );
 			for ( var i = 0; i < HeritabilityMean.ValueCount; i++ )
 			{
 				var index = i;
 				( HeritabilityMean.Values[index], HeritabilitySd.Values[index] ) =
-					HeritabilitySummaries.Select ( x => x.Values[index] ).MeanStandardDeviation ( );
+					clean.Select ( x => x.Values[index] ).MeanStandardDeviation ( );
 			}
 
 			PrintHeritabilitySummaries ( "Heritability.csv" );
